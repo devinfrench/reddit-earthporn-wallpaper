@@ -3,11 +3,21 @@ import json
 import ctypes
 import os
 
-url = "https://www.reddit.com/r/earthporn/.json"
-agent = "EarthPorn Wallpaper"
+filetypes = ["jpg", "png"]
+subreddit = "wallpapers"
+
+url = "https://www.reddit.com/r/" + subreddit + "/.json"
+agent = "Reddit Wallpaper"
 r = requests.get(url, headers={"User-agent": agent})
 data = json.loads(r.content)
-img_url = data["data"]["children"][0]["data"]["url"]
+
+img_url = ""
+for child in data["data"]["children"]:
+    url = child["data"]["url"]
+    if url[-3:] in filetypes:
+        img_url = url
+        break
+
 img_data = requests.get(img_url).content
 file_name = "wallpaper" + img_url[-4:]
 with open(file_name, "wb") as file:
