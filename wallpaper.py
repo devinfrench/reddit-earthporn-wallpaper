@@ -2,9 +2,13 @@ import requests
 import json
 import ctypes
 import os
+import sys
 
 filetypes = ["jpg", "png"]
 subreddit = "wallpapers"
+
+if len(sys.argv) > 1:
+    subreddit = sys.argv[1]
 
 url = "https://www.reddit.com/r/" + subreddit + "/.json"
 agent = "Reddit Wallpaper"
