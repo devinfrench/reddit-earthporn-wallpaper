@@ -36,7 +36,6 @@ for child in data["data"]["children"]:
     url = child["data"]["url"]
     if url[-3:] in filetypes:
         img_url = url
-        print(img_url)
         break
 
 img_data = requests.get(img_url).content
